@@ -53,7 +53,14 @@ public partial class ListaProduto : ContentPage
 
             List<Produto> tmp = await App.Db.Search(q);
 
+            if (tmp.Count == 0 && !string.IsNullOrWhiteSpace(q))
+            {
+                await DisplayAlert("Busca", "Nenhum produto encontrado.", "OK");
+            }
+
             tmp.ForEach(i => lista.Add(i));
+
+
         }
         catch (Exception ex)
         {

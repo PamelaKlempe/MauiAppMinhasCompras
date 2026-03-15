@@ -40,10 +40,9 @@ namespace MauiAppMinhasCompras.Helpers
 
         public Task<List<Produto>> Search(string q)
         {
-            string sql = "SELECT * FROM Produto " +
-                         "WHERE descricao LIKE '%" + q + "%'";
+            string sql = "SELECT * FROM Produto WHERE Descricao LIKE ? OR Id LIKE ?";
+            return _conn.QueryAsync<Produto>(sql, "%" + q + "%", "%" + q + "%");
 
-            return _conn.QueryAsync<Produto>(sql);
         }
     } // Fecha classe SQLiteDatabaseHelper
 } // Fecha namespace MauiAppMinhasCompras.Helpers
